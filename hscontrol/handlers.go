@@ -143,6 +143,28 @@ var registerWebAPITemplate = template.Must(
 <html>
 	<head>
 		<title>Registration - Headscale</title>
+		<meta name=viewport content="width=device-width, initial-scale=1">
+		<script type=application/javascript>
+			function copy() {
+				const txt = document.getElementById('command');
+				navigator.clipboard.writeText(txt.innerText);
+			}
+		</script>
+		<style>
+			body {
+				font-family: sans;
+			}
+			#command {
+				display: block;
+				padding: 20px;
+				border: 1px solid #bbb;
+				background-color: #eee;
+			}
+			button {
+				margin: 10px 0;
+				padding: 5px 20px;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>headscale</h1>
@@ -150,7 +172,8 @@ var registerWebAPITemplate = template.Must(
 		<p>
 			Run the command below in the headscale server to add this machine to your network:
 		</p>
-		<pre><code>headscale nodes register --user USERNAME --key {{.Key}}</code></pre>
+		<code id=command>headscale nodes register --user USERNAME --key {{.Key}}</code>
+		<button onclick='copy()'>Copy</button>
 	</body>
 </html>
 `))
